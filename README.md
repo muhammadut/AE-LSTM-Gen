@@ -36,6 +36,24 @@ distances, indices = lstm_autoencoder.find_nearest_neighbors(embeddings, embeddi
 
 # Data Format
 
+### Dummy Data Generation
+
+```python
+np.random.seed(42)
+n_policies = 100
+max_exp_years = 5
+n_features = 10
+data = []
+for policy in range(1, n_policies + 1):
+    n_years = np.random.randint(1, max_exp_years + 1)
+    for year in range(n_years):
+        data.append([policy, year] + list(np.random.rand(n_features)) + [np.random.randint(0, 2)])
+columns = ['policynumber', 'pol_exp_year'] + [f'feature_{i}' for i in range(n_features)] + ['acpt_nt_ind']
+dummy_df = pd.DataFrame(data, columns=columns)
+
+```
+
+
 | policynumber | pol_exp_year | feature_0 | feature_1 | feature_2 | ... | feature_9 | acpt_nt_ind |
 |--------------|--------------|-----------|-----------|-----------|-----|-----------|-------------|
 | 1            | 0            | 0.374540  | 0.950714  | 0.731994  | ... | 0.708073  | 1           |
